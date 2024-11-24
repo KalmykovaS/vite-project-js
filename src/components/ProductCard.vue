@@ -24,7 +24,15 @@
       </p>
       <p class="mt-1">
         <span class="font-semibold opacity-70">Rating: </span>
-        {{ rating.rate }} (Total ratings: {{ rating.count }})</p>
+        {{ rating.rate }} (Total reviews: {{ rating.count }})
+      </p>
+      <button
+          type="button"
+          @click="$emit('modal-open', $event)"
+          class="px-4 py-2 border-slate-300 rounded-2xl mt-4"
+      >
+        Order
+      </button>
     </div>
   </div>
 </template>
@@ -43,7 +51,7 @@ const props = defineProps({
       count: 0,
     }),
   }
-})
+});
 
 </script>
 
