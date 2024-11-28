@@ -11,149 +11,139 @@
           X
         </button>
       </div>
-      <Form
-          :validation-schema="schema"
-          @submit="onSubmit"
-          class="flex flex-col gap-2 mt-4"
-          v-if="!isSuccess && !isError"
-      >
+      <div v-if="!isSuccess && !isError">
+        <Form
+            :initial-values="initialValues"
+            :validation-schema="schema"
+            @submit="onSubmit"
+            class="flex flex-col gap-2 mt-4"
+        >
 
-        <div class="flex flex-col gap-1">
-          <Field
-              class="rounded-md p-2"
-              name="firstName"
-              type="text"
-              placeholder="First Name"
-              v-model="form.firstName"
-          />
-          <ErrorMessage class="text-red-500 text-sm" name="firstName" />
-        </div>
+          <div class="flex flex-col gap-1">
+            <Field
+                class="rounded-md p-2"
+                name="firstName"
+                type="text"
+                placeholder="First Name"
+            />
+            <ErrorMessage class="text-red-500 text-sm" name="firstName" />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <Field
-              class="rounded-md p-2"
-              name="lastName"
-              type="text"
-              placeholder="Last Name"
-              v-model="form.lastName"
-          />
-          <ErrorMessage class="text-red-500 text-sm" name="firstName" />
-        </div>
+          <div class="flex flex-col gap-1">
+            <Field
+                class="rounded-md p-2"
+                name="lastName"
+                type="text"
+                placeholder="Last Name"
+            />
+            <ErrorMessage class="text-red-500 text-sm" name="firstName" />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <Field
-              class="rounded-md p-2"
-              name="email"
-              type="email"
-              placeholder="Email"
-              v-model="form.email"
-          />
-          <ErrorMessage class="text-red-500 text-sm" name="email" />
-        </div>
+          <div class="flex flex-col gap-1">
+            <Field
+                class="rounded-md p-2"
+                name="email"
+                type="email"
+                placeholder="Email"
+            />
+            <ErrorMessage class="text-red-500 text-sm" name="email" />
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <Field
-              as="select"
-              name="countries"
-              class="rounded-md p-2"
-              v-model="form.countries"
-          >
-            <option
-                v-for="option in options"
-                :key="option.value"
-                :value="option.value"
+          <div class="flex flex-col gap-1">
+            <Field
+                as="select"
+                name="countries"
+                class="rounded-md p-2"
             >
-              {{ option.text }}
-            </option>
-          </Field>
-        </div>
+              <option
+                  v-for="option in options"
+                  :key="option.value"
+                  :value="option.value"
+              >
+                {{ option.text }}
+              </option>
+            </Field>
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <Field
-              class="rounded-md p-2"
-              name="address"
-              type="text"
-              placeholder="Address"
-              v-model="form.address"
-          />
-          <ErrorMessage class="text-red-500 text-sm" name="address" />
-        </div>
-
-        <div class="flex items-center justify-between">
-          <label>
+          <div class="flex flex-col gap-1">
             <Field
-                name="payment"
-                type="radio"
-                value="card"
-                v-model="form.payment"
+                class="rounded-md p-2"
+                name="address"
+                type="text"
+                placeholder="Address"
             />
-            Payment by card
-          </label>
-          <label>
-            <Field
-                name="payment"
-                type="radio"
-                value="cash"
-                v-model="form.payment"
-            />
-            Payment by cash
-          </label>
-        </div>
+            <ErrorMessage class="text-red-500 text-sm" name="address" />
+          </div>
 
-        <div
-            v-if="form.payment === 'card'"
-            class="flex flex-col gap-1"
-        >
-          <Field
-              name="cardNumber"
-              class="rounded-md p-2"
-              type="text"
-              placeholder="Card number"
-              v-model="form.cardNumber"
-          />
-          <ErrorMessage class="text-red-500 text-sm" name="cardNumber" />
-        </div>
+          <div class="flex items-center justify-between">
+            <label>
+              <Field
+                  name="payment"
+                  type="radio"
+                  value="card"
+              />
+              Payment by card
+            </label>
+            <label>
+              <Field
+                  name="payment"
+                  type="radio"
+                  value="cash"
+              />
+              Payment by cash
+            </label>
+          </div>
 
-        <div class="flex flex-col gap-1">
-          <label>
+          <div
+              class="flex flex-col gap-1"
+          >
             <Field
-                name="agreementOrder"
-                type="checkbox"
-                v-model="form.agreementOrder"
+                name="cardNumber"
+                class="rounded-md p-2"
+                type="text"
+                placeholder="Card number"
             />
-            I agree to order processing
-          </label>
-          <ErrorMessage class="text-red-500 text-sm" name="agreementOrder" />
-        </div>
+            <ErrorMessage class="text-red-500 text-sm" name="cardNumber" />
+          </div>
 
-        <div class="flex items-center justify-between">
-          <label>
-            <Field
-                name="promo"
-                value="email-promo"
-                type="checkbox"
-                v-model="form.promo"
-            />
-            Receive promo by email
-          </label>
-          <label>
-            <Field
-                name="promo"
-                value="phone-promo"
-                type="checkbox"
-                v-model="form.promo"
-            />
-            Receive promo by phone
-          </label>
-        </div>
+          <div class="flex flex-col gap-1">
+            <label>
+              <Field
+                  name="agreementOrder"
+                  type="checkbox"
+              />
+              I agree to order processing
+            </label>
+            <ErrorMessage class="text-red-500 text-sm" name="agreementOrder" />
+          </div>
 
-        <button
-            type="submit"
-            class="px-4 py-2 border-slate-300 rounded-2xl mt-4"
-        >
-          Submit
-        </button>
-      </Form>
+          <div class="flex items-center justify-between">
+            <label>
+              <Field
+                  name="promo"
+                  value="email-promo"
+                  type="checkbox"
+              />
+              Receive promo by email
+            </label>
+            <label>
+              <Field
+                  name="promo"
+                  value="phone-promo"
+                  type="checkbox"
+              />
+              Receive promo by phone
+            </label>
+          </div>
+
+          <button
+              type="submit"
+              class="px-4 py-2 border-slate-300 rounded-2xl mt-4"
+          >
+            Submit
+          </button>
+        </Form>
+      </div>
       <div v-else-if="isSuccess">
         Your order has been successfully placed!
       </div>
@@ -170,7 +160,7 @@ import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 import axios from 'axios';
 
-const form = reactive({
+const initialValues = {
   email: '',
   firstName: '',
   lastName: '',
@@ -182,7 +172,7 @@ const form = reactive({
   agreementOrder: false,
   // вводим значение, если нужно предзаполненный checkbox, можем указать ни одного или оба
   promo: ['email-promo'],
-});
+}
 
 const options = ref([
   { value: '01', text: 'Russia' },
