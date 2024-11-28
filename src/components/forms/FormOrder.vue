@@ -24,6 +24,7 @@
               name="firstName"
               type="text"
               placeholder="First Name"
+              v-model="form.firstName"
           />
           <ErrorMessage class="text-red-500 text-sm" name="firstName" />
         </div>
