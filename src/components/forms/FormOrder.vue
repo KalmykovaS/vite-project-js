@@ -24,7 +24,6 @@
               name="firstName"
               type="text"
               placeholder="First Name"
-              v-model="form.firstName"
           />
           <ErrorMessage class="text-red-500 text-sm" name="firstName" />
         </div>
@@ -165,12 +164,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 import axios from 'axios';
 
-const form = ref({
+const form = reactive({
   email: '',
   firstName: '',
   lastName: '',

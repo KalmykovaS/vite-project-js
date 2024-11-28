@@ -40,11 +40,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import {ref, computed, onBeforeMount} from 'vue';
 import Header from "./components/header/Header.vue";
 import ProductCard from "./components/ProductCard.vue";
 import LoaderCircle from "./components/loaders/LoaderCircle.vue";
 import FormOrder from "./components/forms/FormOrder.vue";
+import axios from 'axios';
 
 const data = ref([]);
 const isLoading = ref(true);
@@ -52,16 +53,31 @@ const isLoading = ref(true);
 const searchTitle = ref('');
 const searchPrice = ref('');
 
-fetch('https://fakestoreapi.com/products')
-    .then((res) => res.json())
-    .then((json) => {
-      data.value = json;
-      isLoading.value = false;
-    })
-    .catch((err) => {
-      console.error('Error:', err);
-      isLoading.value = false;
-    });
+// fetch('https://fakestoreapi.com/products')
+//     .then((res) => res.json())
+//     .then((json) => {
+//       data.value = json;
+//       isLoading.value = false;
+//     })
+//     .catch((err) => {
+//       console.error('Error:', err);
+//       isLoading.value = false;
+//     });
+
+async function fetchData() {
+  try {
+    isLoading.value = false;
+    const response = await axios.get('https://fakestoreapi.com/products');
+    isLoading.value = false;
+    data.value = response.data;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+onBeforeMount(() => {
+  fetchData();
+});
 
 const filteredData = computed(() => {
   return data.value.filter((card) => {
